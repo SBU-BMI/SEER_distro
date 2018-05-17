@@ -90,7 +90,7 @@ if __name__ == '__main__':
   image_height=0;  
   x0=0.0;
   y0=0.0
-  tolence=0.05;
+  tolerance=0.05;
   patch_x_num=0; 
   patch_y_num=0;
   
@@ -266,10 +266,10 @@ if __name__ == '__main__':
         Hematoxylin_patch_mean=np.mean(Hematoxylin_img_matrix);
         Hematoxylin_patch_std=np.std(Hematoxylin_img_matrix);
         
-        x1_new=x10-(x10*tolence);
-        y1_new=y10-(y10*tolence);
-        x2_new=x20+(x20*tolence);
-        y2_new=y20+(y20*tolence);       
+        x1_new=x10-(x10*tolerance);
+        y1_new=y10-(y10*tolerance);
+        x2_new=x20+(x20*tolerance);
+        y2_new=y20+(y20*tolerance);       
         nucleus_area=0.0;
         segment_img=[];
         segment_img_hematoxylin=[]; 
