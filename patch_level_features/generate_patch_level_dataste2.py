@@ -1,14 +1,20 @@
-from pymongo import MongoClient
 from shapely.geometry import LineString
 from shapely.geometry.polygon import LinearRing
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 from shapely.affinity import affine_transform
 from shapely import ops
-from bson import json_util 
-from matplotlib.path import Path
+
 from skimage import color
 from skimage import io
+from skimage.color import separate_stains,hed_from_rgb
+from skimage import data
+
+from pymongo import MongoClient
+from bson import json_util 
+from matplotlib.path import Path
+from PIL import Image
+
 import numpy as np
 import time
 import pprint
@@ -21,11 +27,7 @@ import subprocess
 import pipes
 import shlex
 import math
-from skimage.color import separate_stains,hed_from_rgb
-from skimage import data
 import openslide
-from PIL import Image
-    
     
 if __name__ == '__main__':
   if len(sys.argv)<1:
@@ -144,7 +146,7 @@ if __name__ == '__main__':
   def getCompositeDatasetExecutionID(case_id):
     execution_id="";
     for record in metadata2.find({"image.case_id":case_id,                 
-				                          "provenance.analysis_execution_id":{'$regex' : 'composite_dataset', '$options' : 'i'}}).limit(1): 
+		                  "provenance.analysis_execution_id":{'$regex' : 'composite_dataset', '$options' : 'i'}}).limit(1): 
       execution_id=record["provenance"]["analysis_execution_id"];
       break;
     return execution_id;    
