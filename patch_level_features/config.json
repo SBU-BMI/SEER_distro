@@ -3,5 +3,6 @@
   "image_list":"your_image_list_file_path/image_list.txt",
   "db_host":"your db host",
   "db_port":"27017",
-  "db_name":"quip_comp"  
+  "db_name1":"quip_comp"  
+  "db_name2":"quip_comp"
 }
