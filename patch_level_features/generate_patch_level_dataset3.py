@@ -153,14 +153,7 @@ if __name__ == '__main__':
       execution_id=record["provenance"]["analysis_execution_id"];
       break;
     return execution_id;    
-  #################################################  
-  
-  
-  ##################### testing ##########################
-  #for record in metadata2.find({"image.case_id":"PC_052_0_1","provenance.analysis_execution_id":{'$regex' : 'composite_dataset', '$options' : 'i'}},{"_id":0}): 
-    #print  record;                                                                            
-  #patch_level_features.insert_one(patch_feature_json); 
-  #exit();        
+  #################################################           
   
   print '--- process image_list  ---- ';   
   for item in image_list:  
