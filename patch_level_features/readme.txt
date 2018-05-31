@@ -11,6 +11,6 @@ How to use cluster to generate patch level features data:
 
 4) features dataset has been saved to quip3 mongo db "quip_comp" collection "patch_level_dataset";
 
-5) run generate_heatmap_all.py to generate and load heatmap to quip db in quip3  server;
+5) run generate_heatmap.py to generate and load heatmap to quip db in quip3  server;
             
 
