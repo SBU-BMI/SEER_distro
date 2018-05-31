@@ -23,8 +23,6 @@ user=$user
 cd $PBS_O_WORKDIR
 python run_jobs.py  $case_id $user
 
-rm -rf $LOCALDIR_TMP
-
 echo "-----------------------------------------------------"
 echo "Date: $(date)"
 echo "-----------------------------------------------------"
