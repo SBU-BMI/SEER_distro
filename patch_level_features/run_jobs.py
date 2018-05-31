@@ -37,7 +37,7 @@ if __name__ == '__main__':
     exit();  
   
   csv.field_size_limit(sys.maxsize);  
-  max_workers=8;    
+  max_workers=16;    
   
   case_id= sys.argv[1];
   user= sys.argv[2] ;
