@@ -237,7 +237,71 @@ if __name__ == '__main__':
     objects.insert_one(dict_patch);  
   ######################################################################
  
-    
+  ######################################################################
+  def removeAllHeatmaps(case_id):    
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_percent_nuclear_material_tumor"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_patch_mean_tumor"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_patch_std_tumor"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_patch_mean_tumor"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_patch_std_tumor"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_segment_mean_tumor"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_segment_std_tumor"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_segment_mean_tumor"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_segment_std_tumor"});                       
+  ######################################################################
+                       
+  ######################################################################
+  def removeAllHeatmaps_all(case_id):    
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_percent_nuclear_material_all"}); 
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_grayscale_patch_mean_all"});    
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_grayscale_patch_std_all"});
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_Hematoxylin_patch_mean_all"});                                                   
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_Hematoxylin_patch_std_all"});
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_grayscale_segment_mean_all"});
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_grayscale_segment_std_all"});
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_Hematoxylin_segment_mean_all"});
+    metadata.remove({"image.case_id":case_id,
+                     "provenance.analysis_execution_id":"PL_Hematoxylin_segment_std_all"});                     
+                                                                        
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_percent_nuclear_material_all"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_patch_mean_all"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_patch_std_all"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_patch_mean_all"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_patch_std_all"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_segment_mean_all"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_grayscale_segment_std_all"});                       
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_segment_mean_all"});
+    objects.remove({"provenance.image.case_id":case_id,
+                     "provenance.analysis.execution_id":"PL_Hematoxylin_segment_std_all"});    
+                                       
+  ######################################################################
+
+
   print '--- process image_list  ---- ';   
   for item in image_list:  
     case_id=item[0];
