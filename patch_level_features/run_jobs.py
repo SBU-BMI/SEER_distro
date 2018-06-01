@@ -197,12 +197,20 @@ if __name__ == '__main__':
       if(is_intersect):          
         humanMarkupList_non_tumor.append(humarkup_polygon1);
     
-    """    
     #handle tumor and non tumor region cross overlap
-    for tumor_region in humanMarkupList_tumor:
-      for non_tumor_region in humanMarkupList_non_tumor:
-        if (tumor_region.within(non_tumor_region)):    
-    """
+    for index1,tumor_region in enumerate(humanMarkupList_tumor):
+      for index2,non_tumor_region in enumerate(humanMarkupList_non_tumor):
+        if (tumor_region.within(non_tumor_region)): 
+          ext_polygon_intersect_points =list(zip(*non_tumor_region.exterior.coords.xy));   
+          int_polygon_intersect_points =list(zip(*tumor_region.exterior.coords.xy)); 
+          newPoly = Polygon(ext_polygon_intersect_points,[int_polygon_intersect_points]);
+          humanMarkupList_non_tumor[index2]=newPoly;#add a hole to this polygon
+        elif (non_tumor_region.within(tumor_region)): 
+          ext_polygon_intersect_points =list(zip(*tumor_region.exterior.coords.xy));   
+          int_polygon_intersect_points =list(zip(*non_tumor_region.exterior.coords.xy)); 
+          newPoly = Polygon(ext_polygon_intersect_points,[int_polygon_intersect_points]);
+          humanMarkupList_tumor[index1]=newPoly;#add a hole to this polygon
+		
     return  humanMarkupList_tumor,humanMarkupList_non_tumor;     
   ################################################
   
