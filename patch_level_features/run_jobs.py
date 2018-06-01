@@ -114,6 +114,8 @@ if __name__ == '__main__':
   def findTumor_NonTumorRegions(case_id,user):
     execution_id=user+"_Tumor_Region";
     execution_id2=user+"_Non_Tumor_Region";
+    
+    #handle only tumor region overlap
     humanMarkupList_tumor=[];
     tmp_tumor_markup_list=[];
     for humarkup in objects.find({"provenance.image.case_id":case_id,
@@ -153,7 +155,8 @@ if __name__ == '__main__':
         continue;         
       if(is_intersect):          
         humanMarkupList_tumor.append(humarkup_polygon1);            
-        
+    
+    #handle only non tumor region overlap
     humanMarkupList_non_tumor=[];
     tmp_non_tumor_markup_list=[];
     for humarkup in objects.find({"provenance.image.case_id":case_id,
@@ -193,7 +196,13 @@ if __name__ == '__main__':
         continue;         
       if(is_intersect):          
         humanMarkupList_non_tumor.append(humarkup_polygon1);
-      
+    
+    """    
+    #handle tumor and non tumor region cross overlap
+    for tumor_region in humanMarkupList_tumor:
+      for non_tumor_region in humanMarkupList_non_tumor:
+        if (tumor_region.within(non_tumor_region)):    
+    """
     return  humanMarkupList_tumor,humanMarkupList_non_tumor;     
   ################################################
   
