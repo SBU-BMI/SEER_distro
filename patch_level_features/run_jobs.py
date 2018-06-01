@@ -115,26 +115,84 @@ if __name__ == '__main__':
     execution_id=user+"_Tumor_Region";
     execution_id2=user+"_Non_Tumor_Region";
     humanMarkupList_tumor=[];
+    tmp_tumor_markup_list=[];
     for humarkup in objects.find({"provenance.image.case_id":case_id,
                                   "provenance.analysis.execution_id":execution_id},
                                  {"geometry":1,"_id":0}):
-      humarkup_polygon_tmp=humarkup["geometry"]["coordinates"][0];             
-      tmp_polygon=[tuple(i2) for i2 in humarkup_polygon_tmp];
-      tmp_polygon2 = Polygon(tmp_polygon);
-      humarkup_polygon = tmp_polygon2.buffer(0);
-      #humarkup_polygon_bound= humarkup_polygon.bounds;
-      humanMarkupList_tumor.append(humarkup_polygon);              
-    
+      tmp_tumor_markup_list.append(humarkup); 
+              
+    index_intersected=[];                                
+    for index1 in range(0, len(tmp_tumor_markup_list)):  
+      if index1 in index_intersected :#skip polygon,which is been merged to another one
+        continue;
+      tmp_tumor_markup1=tmp_tumor_markup_list[index1];                               
+      humarkup_polygon_tmp1=tmp_tumor_markup1["geometry"]["coordinates"][0];             
+      tmp_polygon=[tuple(i1) for i1 in humarkup_polygon_tmp1];
+      tmp_polygon1 = Polygon(tmp_polygon);
+      humarkup_polygon1 = tmp_polygon1.buffer(0);
+      humarkup_polygon_bound1= humarkup_polygon1.bounds;
+      is_within=False;
+      is_intersect=False;
+      for index2 in range(0, len(tmp_tumor_markup_list)):  
+        tmp_tumor_markup2=tmp_tumor_markup_list[index2];                               
+        humarkup_polygon_tmp2=tmp_tumor_markup2["geometry"]["coordinates"][0];             
+        tmp_polygon2=[tuple(i2) for i2 in humarkup_polygon_tmp2];
+        tmp_polygon22 = Polygon(tmp_polygon2);
+        humarkup_polygon2 = tmp_polygon22.buffer(0);
+        if (index1 <> index2):
+          if (humarkup_polygon1.within(humarkup_polygon2)):    
+            is_within=True;            
+            break;              
+          if (humarkup_polygon1.intersects(humarkup_polygon2)):
+            humarkup_polygon1=humarkup_polygon1.union(humarkup_polygon2); 
+            is_intersect=True;
+            index_intersected.append(index2);                
+      if(not is_within and not is_intersect):
+        humanMarkupList_tumor.append(humarkup_polygon1);          
+      if(is_within):
+        continue;         
+      if(is_intersect):          
+        humanMarkupList_tumor.append(humarkup_polygon1);            
+        
     humanMarkupList_non_tumor=[];
+    tmp_non_tumor_markup_list=[];
     for humarkup in objects.find({"provenance.image.case_id":case_id,
                                   "provenance.analysis.execution_id":execution_id2},
-                                  {"geometry":1,"_id":0}):
-      humarkup_polygon_tmp=humarkup["geometry"]["coordinates"][0];             
-      tmp_polygon=[tuple(i2) for i2 in humarkup_polygon_tmp];
-      tmp_polygon2 = Polygon(tmp_polygon);
-      humarkup_polygon = tmp_polygon2.buffer(0);
-      #humarkup_polygon_bound= humarkup_polygon.bounds;
-      humanMarkupList_non_tumor.append(humarkup_polygon);
+                                 {"geometry":1,"_id":0}):
+      tmp_non_tumor_markup_list.append(humarkup);     
+        
+    index_intersected=[];                                
+    for index1 in range(0, len(tmp_non_tumor_markup_list)):  
+      if index1 in index_intersected :#skip polygon,which is been merged to another one
+        continue;
+      tmp_tumor_markup1=tmp_non_tumor_markup_list[index1];                               
+      humarkup_polygon_tmp1=tmp_tumor_markup1["geometry"]["coordinates"][0];             
+      tmp_polygon=[tuple(i1) for i1 in humarkup_polygon_tmp1];
+      tmp_polygon1 = Polygon(tmp_polygon);
+      humarkup_polygon1 = tmp_polygon1.buffer(0);
+      humarkup_polygon_bound1= humarkup_polygon1.bounds;
+      is_within=False;
+      is_intersect=False;
+      for index2 in range(0, len(tmp_non_tumor_markup_list)):  
+        tmp_tumor_markup2=tmp_non_tumor_markup_list[index2];                               
+        humarkup_polygon_tmp2=tmp_tumor_markup2["geometry"]["coordinates"][0];             
+        tmp_polygon2=[tuple(i2) for i2 in humarkup_polygon_tmp2];
+        tmp_polygon22 = Polygon(tmp_polygon2);
+        humarkup_polygon2 = tmp_polygon22.buffer(0);
+        if (index1 <> index2):
+          if (humarkup_polygon1.within(humarkup_polygon2)):    
+            is_within=True;            
+            break;              
+          if (humarkup_polygon1.intersects(humarkup_polygon2)):
+            humarkup_polygon1=humarkup_polygon1.union(humarkup_polygon2); 
+            is_intersect=True;
+            index_intersected.append(index2);                
+      if(not is_within and not is_intersect):
+        humanMarkupList_non_tumor.append(humarkup_polygon1);          
+      if(is_within):
+        continue;         
+      if(is_intersect):          
+        humanMarkupList_non_tumor.append(humarkup_polygon1);
       
     return  humanMarkupList_tumor,humanMarkupList_non_tumor;     
   ################################################
