@@ -205,7 +205,7 @@ if __name__ == '__main__':
     dict_patch['x'] = x
     dict_patch['y'] = y
     dict_patch['normalized'] = 'true'
-    dict_patch['object_type'] = 'seer_heatmap'    
+    dict_patch['object_type'] = 'heatmap'    
     dict_patch['bbox'] = [x1, y1, x2, y2]
 
     dict_geo = {}
