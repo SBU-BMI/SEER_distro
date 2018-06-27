@@ -210,7 +210,24 @@ if __name__ == '__main__':
           newPoly = Polygon(ext_polygon_intersect_points,[int_polygon_intersect_points]);
           humanMarkupList_tumor[index1]=newPoly;#add a hole to this polygon        
       
-    return  humanMarkupList_tumor,humanMarkupList_non_tumor;     
+    #handle MultiPolygon,convert them to single Polygon       
+    humanMarkupList_tumor_tmp=[];
+    humanMarkupList_non_tumor_tmp=[];
+    for tmp_markup in humanMarkupList_tumor:
+      if tmp_markup.geom_type == 'MultiPolygon':                                 
+        for p in tmp_markup:               
+          humanMarkupList_tumor_tmp.append(p);
+      elif tmp_markup.geom_type == 'Polygon':  
+        humanMarkupList_tumor_tmp.append(tmp_markup); 
+        
+    for tmp_markup in humanMarkupList_non_tumor:
+      if tmp_markup.geom_type == 'MultiPolygon':                                 
+        for p in tmp_markup:               
+          humanMarkupList_non_tumor_tmp.append(p);
+      elif tmp_markup.geom_type == 'Polygon':  
+        humanMarkupList_non_tumor_tmp.append(tmp_markup);
+                
+    return  humanMarkupList_tumor_tmp,humanMarkupList_non_tumor_tmp;      
   ################################################
   
   ###############################################
