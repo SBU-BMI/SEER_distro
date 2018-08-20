@@ -91,7 +91,7 @@ if __name__ == '__main__':
   metadata2=db2.metadata;
   objects2 = db2.objects; 
     
-  collection_saved= db2.patch_level_features_run3; 
+  collection_saved= db2.patch_level_features; 
   
   image_width=0;
   image_height=0;    
