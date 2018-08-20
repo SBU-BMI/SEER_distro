@@ -4,7 +4,9 @@ How to use cluster to generate patch level features data:
 1) files involved: run_jobs.sh,run_jobs.pbs,run_jobs.py,config_cluster.json,
                    image_user_list.txt,image_path.txt,generate_heatmap.py,config.json
                    
-2) copy config_cluster.json and image_path.txt to 10 cluster node
+2a) copy config_cluster.json and image_path.txt to 10 cluster node
+2b) copy  case_id_prefix.txt to 10 computing node;
+    pdsh -w node[001-010] cp -rf /home/bwang/patch_level/case_id_prefix.txt  /data1/bwang/case_id_prefix.txt 
 
 3a) command: sh run_jobs.sh
             enter image user list file:
