@@ -711,8 +711,7 @@ if __name__ == '__main__':
         segment_mean_hematoxylin_intensity="n/a";
         segment_std_hematoxylin_intensity="n/a";            
       
-      if (len(Flatness_list)>0):
-        #print Flatness_list;        
+      if (len(Flatness_list)>0):                
         Flatness_segment_mean= np.mean(Flatness_list);
         Flatness_segment_std= np.std(Flatness_list); 
       else:
@@ -1129,7 +1128,7 @@ if __name__ == '__main__':
               segment_img.append(grayscale_img_matrix[index1][index2]);
               segment_img_hematoxylin.append(Hematoxylin_img_matrix[index1][index2]);     
                
-      percent_nuclear_material =float((nucleus_area/patch_polygon_area)*100);  
+      percent_nuclear_material =float((nucleus_area/patch_polygon_area2)*100);  
              
       if (len(segment_img)>0):          
         segment_mean_grayscale_intensity= np.mean(segment_img);
@@ -1191,9 +1190,9 @@ if __name__ == '__main__':
         b_cytoIntensityMean_segment_mean="n/a";
         b_cytoIntensityMean_segment_std="n/a";             
       
-      print case_id,image_width,image_height,user,title_index,patch_min_x_pixel,patch_min_y_pixel,patch_size,patch_polygon_area,tumorFlag,nucleus_area,percent_nuclear_material,grayscale_patch_mean,grayscale_patch_std,Hematoxylin_patch_mean,Hematoxylin_patch_std,segment_mean_grayscale_intensity,segment_std_grayscale_intensity,segment_mean_hematoxylin_intensity,segment_std_hematoxylin_intensity,Flatness_segment_mean,Flatness_segment_std,Perimeter_segment_mean,Perimeter_segment_std,Circularity_segment_mean,Circularity_segment_std,r_GradientMean_segment_mean,r_GradientMean_segment_std,b_GradientMean_segment_mean,b_GradientMean_segment_std,r_cytoIntensityMean_segment_mean,r_cytoIntensityMean_segment_std,b_cytoIntensityMean_segment_mean,b_cytoIntensityMean_segment_std; 
+      print case_id,image_width,image_height,user,title_index,patch_min_x_pixel,patch_min_y_pixel,patch_size,patch_polygon_area2,tumorFlag,nucleus_area,percent_nuclear_material,grayscale_patch_mean,grayscale_patch_std,Hematoxylin_patch_mean,Hematoxylin_patch_std,segment_mean_grayscale_intensity,segment_std_grayscale_intensity,segment_mean_hematoxylin_intensity,segment_std_hematoxylin_intensity,Flatness_segment_mean,Flatness_segment_std,Perimeter_segment_mean,Perimeter_segment_std,Circularity_segment_mean,Circularity_segment_std,r_GradientMean_segment_mean,r_GradientMean_segment_std,b_GradientMean_segment_mean,b_GradientMean_segment_std,r_cytoIntensityMean_segment_mean,r_cytoIntensityMean_segment_std,b_cytoIntensityMean_segment_mean,b_cytoIntensityMean_segment_std; 
       print "\n"; 
-      saveFeatures2MongoDB(case_id,image_width,image_height,user,title_index,patch_min_x_pixel,patch_min_y_pixel,patch_size,patch_polygon_area,tumorFlag,nucleus_area,percent_nuclear_material,grayscale_patch_mean,grayscale_patch_std,Hematoxylin_patch_mean,Hematoxylin_patch_std,segment_mean_grayscale_intensity,segment_std_grayscale_intensity,segment_mean_hematoxylin_intensity,segment_std_hematoxylin_intensity,Flatness_segment_mean,Flatness_segment_std,Perimeter_segment_mean,Perimeter_segment_std,Circularity_segment_mean,Circularity_segment_std,r_GradientMean_segment_mean,r_GradientMean_segment_std,b_GradientMean_segment_mean,b_GradientMean_segment_std,r_cytoIntensityMean_segment_mean,r_cytoIntensityMean_segment_std,b_cytoIntensityMean_segment_mean,b_cytoIntensityMean_segment_std);      
+      saveFeatures2MongoDB(case_id,image_width,image_height,user,title_index,patch_min_x_pixel,patch_min_y_pixel,patch_size,patch_polygon_area2,tumorFlag,nucleus_area,percent_nuclear_material,grayscale_patch_mean,grayscale_patch_std,Hematoxylin_patch_mean,Hematoxylin_patch_std,segment_mean_grayscale_intensity,segment_std_grayscale_intensity,segment_mean_hematoxylin_intensity,segment_std_hematoxylin_intensity,Flatness_segment_mean,Flatness_segment_std,Perimeter_segment_mean,Perimeter_segment_std,Circularity_segment_mean,Circularity_segment_std,r_GradientMean_segment_mean,r_GradientMean_segment_std,b_GradientMean_segment_mean,b_GradientMean_segment_std,r_cytoIntensityMean_segment_mean,r_cytoIntensityMean_segment_std,b_cytoIntensityMean_segment_mean,b_cytoIntensityMean_segment_std);      
   #####################################################################
           
   print '--- process image_list  ---- ';   
@@ -1312,7 +1311,10 @@ if __name__ == '__main__':
             tmp_poly=[tuple(i1) for i1 in patch_polygon_0];
             tmp_polygon = Polygon(tmp_poly);
             patch_polygon = tmp_polygon.buffer(0);            
-          
+            
+	    patch_polygon_area1=0.0;
+            patch_polygon_area2=0.0;
+		
             patchHumanMarkupRelation_tumor="disjoin";
             patchHumanMarkupRelation_nontumor="disjoin";  
             patch_humanmarkup_intersect_polygon_tumor = Polygon([(0, 0), (1, 1), (1, 0)]);
@@ -1322,11 +1324,14 @@ if __name__ == '__main__':
               if (patch_polygon.within(humanMarkup)):              
                 patchHumanMarkupRelation_tumor="within";
                 tumor_related_patch=True;
+		patch_polygon_area1=patch_polygon.area;
                 break;
               elif (patch_polygon.intersects(humanMarkup)):                
                 patchHumanMarkupRelation_tumor="intersect";  
                 patch_humanmarkup_intersect_polygon_tumor=humanMarkup;
                 tumor_related_patch=True;
+		polygon_intersect=patch_polygon.intersection(humanMarkup);
+                patch_polygon_area1=polygon_intersect.area;
                 break;
               else:               
                 patchHumanMarkupRelation_tumor="disjoin";           
@@ -1335,20 +1340,22 @@ if __name__ == '__main__':
               if (patch_polygon.within(humanMarkup2)):              
                 patchHumanMarkupRelation_nontumor="within";
                 non_tumor_related_patch=True;
+		patch_polygon_area2=patch_polygon.area;
                 break;
               elif (patch_polygon.intersects(humanMarkup2)):                
                 patchHumanMarkupRelation_nontumor="intersect";  
                 patch_humanmarkup_intersect_polygon_nontumor=humanMarkup2;
                 non_tumor_related_patch=True;
+		polygon_intersect=patch_polygon.intersection(humanMarkup2);
+                patch_polygon_area2=polygon_intersect.area;
                 break;
               else:               
                 patchHumanMarkupRelation_nontumor="disjoin";          
                       
             #only calculate features within/intersect tumor/non tumor region           
             if(patchHumanMarkupRelation_tumor=="disjoin" and patchHumanMarkupRelation_nontumor=="disjoin"):                     
-              continue;  
-          
-            patch_polygon_area=patch_polygon.area;          
+              continue;            
+                      
             patch_min_x=int(x1*image_width);
             patch_min_y=int(y1*image_height);         
             nuclues_item_list=[];          
@@ -1372,7 +1379,7 @@ if __name__ == '__main__':
                   logging.debug('find invalid geometry.'); 
                   logging.debug(validity);                
                        
-            executor.submit(process_one_patch,case_id,user,index,patch_polygon_area,image_width,image_height,patch_polygon_0,patchHumanMarkupRelation_tumor,patchHumanMarkupRelation_nontumor,patch_humanmarkup_intersect_polygon_tumor,patch_humanmarkup_intersect_polygon_nontumor,nuclues_item_list);                                                                 
+            executor.submit(process_one_patch,case_id,user,index,patch_polygon_area1,patch_polygon_area2,image_width,image_height,patch_polygon_0,patchHumanMarkupRelation_tumor,patchHumanMarkupRelation_nontumor,patch_humanmarkup_intersect_polygon_tumor,patch_humanmarkup_intersect_polygon_nontumor,nuclues_item_list);                                                                 
     img.close();  
   exit();  
  
