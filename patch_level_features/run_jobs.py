@@ -1324,13 +1324,13 @@ if __name__ == '__main__':
               if (patch_polygon.within(humanMarkup)):              
                 patchHumanMarkupRelation_tumor="within";
                 tumor_related_patch=True;
-		patch_polygon_area1=patch_polygon.area;
+                patch_polygon_area1=patch_polygon.area;
                 break;
               elif (patch_polygon.intersects(humanMarkup)):                
                 patchHumanMarkupRelation_tumor="intersect";  
                 patch_humanmarkup_intersect_polygon_tumor=humanMarkup;
                 tumor_related_patch=True;
-		polygon_intersect=patch_polygon.intersection(humanMarkup);
+                polygon_intersect=patch_polygon.intersection(humanMarkup);
                 patch_polygon_area1=polygon_intersect.area;
                 break;
               else:               
@@ -1340,13 +1340,13 @@ if __name__ == '__main__':
               if (patch_polygon.within(humanMarkup2)):              
                 patchHumanMarkupRelation_nontumor="within";
                 non_tumor_related_patch=True;
-		patch_polygon_area2=patch_polygon.area;
+                patch_polygon_area2=patch_polygon.area;
                 break;
               elif (patch_polygon.intersects(humanMarkup2)):                
                 patchHumanMarkupRelation_nontumor="intersect";  
                 patch_humanmarkup_intersect_polygon_nontumor=humanMarkup2;
                 non_tumor_related_patch=True;
-		polygon_intersect=patch_polygon.intersection(humanMarkup2);
+                polygon_intersect=patch_polygon.intersection(humanMarkup2);
                 patch_polygon_area2=polygon_intersect.area;
                 break;
               else:               
