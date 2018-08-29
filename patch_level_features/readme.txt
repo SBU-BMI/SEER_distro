@@ -13,7 +13,7 @@ How to use cluster to generate patch level features data:
             image_user_list.txt
             
 3b) files involved run_jobs.sh,run_jobs.pbs,run_jobs.py,config_cluster.json,
-                   image_user_list.txt,image_path.txt;
+                   image_user_list.txt,image_path.txt,case_id_prefix.txt;
                    
 4)log file location: cluster /home/bwang/temp/logs/pbs/    
 
