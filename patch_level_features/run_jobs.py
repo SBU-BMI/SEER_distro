@@ -466,7 +466,7 @@ if __name__ == '__main__':
   ######################################################################  
   
   ######################################################################
-  def process_one_patch(case_id,user,tile_index,patch_polygon_area,image_width,image_height,patch_polygon_original,patchHumanMarkupRelation_tumor,patchHumanMarkupRelation_nontumor,patch_humanmarkup_intersect_polygon_tumor,patch_humanmarkup_intersect_polygon_nontumor,nuclues_item_list):    
+  def process_one_patch(case_id,user,tile_index,patch_polygon_area,patch_polygon_area2,image_width,image_height,patch_polygon_original,patchHumanMarkupRelation_tumor,patchHumanMarkupRelation_nontumor,patch_humanmarkup_intersect_polygon_tumor,patch_humanmarkup_intersect_polygon_nontumor,nuclues_item_list):    
     patch_min_x_pixel =int(patch_polygon_original[0][0]*image_width);
     patch_min_y_pixel =int(patch_polygon_original[0][1]*image_height);
     patch_max_x_pixel =int(patch_polygon_original[2][0]*image_width);
@@ -695,7 +695,9 @@ if __name__ == '__main__':
             if (pixel):#this pixel is inside of segmented unclei polygon                     
               segment_img.append(grayscale_img_matrix[index1][index2]);
               segment_img_hematoxylin.append(Hematoxylin_img_matrix[index1][index2]);     
-               
+      
+      if(tumorFlag=="non_tumor"):
+        patch_polygon_area=patch_polygon_area2;
       percent_nuclear_material =float((nucleus_area/patch_polygon_area)*100);   
           
       if (len(segment_img)>0):          
