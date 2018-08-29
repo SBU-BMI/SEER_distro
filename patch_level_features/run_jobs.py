@@ -1312,7 +1312,7 @@ if __name__ == '__main__':
             tmp_polygon = Polygon(tmp_poly);
             patch_polygon = tmp_polygon.buffer(0);            
             
-	    patch_polygon_area1=0.0;
+            patch_polygon_area1=0.0;
             patch_polygon_area2=0.0;
 		
             patchHumanMarkupRelation_tumor="disjoin";
