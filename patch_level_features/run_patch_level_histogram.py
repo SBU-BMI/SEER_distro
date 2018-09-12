@@ -18,8 +18,8 @@ if __name__ == '__main__':
   user= sys.argv[2] ; 
    
   
-  #my_home="/data1/bwang"  
-  my_home="/home/bwang/patch_level";
+  my_home="/data1/bwang"  
+  #my_home="/home/bwang/patch_level";
   
   picture_folder = os.path.join(my_home, 'picture'); 
   if not os.path.exists(picture_folder):
@@ -95,19 +95,17 @@ if __name__ == '__main__':
       # place a text box in upper left in axes coords
       props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
       textstr="Total patch count: " + str(total_patch_count);
-      ax.text(0.6, 0.95, textstr, transform=ax.transAxes, fontsize=10, verticalalignment='top', bbox=props);
-      
+      ax.text(0.6, 0.95, textstr, transform=ax.transAxes, fontsize=10, verticalalignment='top', bbox=props);      
       #plt.show();
       file_name="patch_level_histogram_"+case_id+"_"+feature+".png";  
       graphic_file_path = os.path.join(picture_folder, file_name);
-      plt.savefig(graphic_file_path); 
-      plt.gcf().clear();   
-      '''                   
+      #plt.savefig(graphic_file_path); 
+      #plt.gcf().clear();                         
       for count in n:        
         hist_count_array.append(int(count));
       for bin_edge in bins:        
         bin_edges_array.append(float(bin_edge));   
-      #saveHistogram(case_id,feature,data_range,hist_count_array,bin_edges_array);  
-      '''
+      saveHistogram(case_id,feature,data_range,hist_count_array,bin_edges_array);  
+     
   exit(); 
 
