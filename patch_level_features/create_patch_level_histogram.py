@@ -45,7 +45,7 @@ if __name__ == '__main__':
   metadata2=db2.metadata;
   objects2 = db2.objects;  
   
-  patch_level_dataset = db2.patch_level_features_run2;  
+  patch_level_dataset = db2.patch_level_features;  
   patch_level_histogram = db2.features_histogram;
   
   #########################################
