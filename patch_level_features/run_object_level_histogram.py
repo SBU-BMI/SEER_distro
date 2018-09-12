@@ -56,8 +56,8 @@ if __name__ == '__main__':
   image_list.append(tmp_array);   
   print image_list;  
   
-  #my_home="/data1/bwang"  
-  my_home="/home/bwang/patch_level"
+  my_home="/data1/bwang"  
+  #my_home="/home/bwang/patch_level"
   
   picture_folder = os.path.join(my_home, 'picture');
   if not os.path.exists(picture_folder):
