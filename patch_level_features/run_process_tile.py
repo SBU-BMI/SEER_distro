@@ -589,11 +589,7 @@ def getTumorMarkupUser(case_id):
 ################################################# 
 
 
-#####################################################################        
-### login eagle cluster nfs004 in folder "/data/shared/bwang"     ###
-### then switch to "/home/bwang/patch_level" to run this program  ###
-#####################################################################
-
+################# main function ###############
 if __name__ == "__main__":    
   if len(sys.argv)<2:
     print "usage:python run_process_tile.py case_id user";
