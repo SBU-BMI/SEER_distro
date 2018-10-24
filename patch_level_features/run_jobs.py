@@ -1195,6 +1195,18 @@ if __name__ == '__main__':
       saveFeatures2MongoDB(case_id,image_width,image_height,user,title_index,patch_min_x_pixel,patch_min_y_pixel,patch_size,patch_polygon_area2,tumorFlag,nucleus_area,percent_nuclear_material,grayscale_patch_mean,grayscale_patch_std,Hematoxylin_patch_mean,Hematoxylin_patch_std,segment_mean_grayscale_intensity,segment_std_grayscale_intensity,segment_mean_hematoxylin_intensity,segment_std_hematoxylin_intensity,Flatness_segment_mean,Flatness_segment_std,Perimeter_segment_mean,Perimeter_segment_std,Circularity_segment_mean,Circularity_segment_std,r_GradientMean_segment_mean,r_GradientMean_segment_std,b_GradientMean_segment_mean,b_GradientMean_segment_std,r_cytoIntensityMean_segment_mean,r_cytoIntensityMean_segment_std,b_cytoIntensityMean_segment_mean,b_cytoIntensityMean_segment_std);      
   #####################################################################
           
+  #################################################
+  def getCsvRecordCount(csv_file_path):
+    line_counts=0;
+    with open(csv_file_path) as csv_file:
+      csv_reader = csv.reader(csv_file, delimiter=',')    
+      for line_count, row in enumerate(csv_reader):
+        line_counts=line_count+1;
+    #print  line_counts 
+    return  line_counts;     
+  #################################################
+  
+  ################################################
   print '--- process image_list  ---- ';   
   for item  in image_list:  
     case_id=item[0];
@@ -1280,6 +1292,10 @@ if __name__ == '__main__':
           detail_local_folder  = os.path.join(local_img_folder, prefix);
           for csv_json_file in os.listdir(detail_local_folder):   
             if csv_json_file.endswith("features.csv") and csv_json_file.find(tmp_string) <> -1:#find it! 
+	      csv_file_path=os.path.join(detail_local_folder, csv_json_file);
+              csv_record_count=getCsvRecordCount(csv_file_path);
+              if csv_record_count==1: #no nucleus material in this tile, only header available, so skip it
+                continue	
               tmp_obj_list=read_csv_data_file(detail_local_folder,csv_json_file);       
               tile_item_array.extend(tmp_obj_list);           
            
