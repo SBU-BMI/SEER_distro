@@ -1,0 +1,172 @@
+{
+  "profiles": {
+    "ImageList": {
+      "dataSource": {
+        "host": "127.0.0.1",
+        "port": "27017",
+        "db": "quip_comp",
+        "collection": "validation_image_list",
+        "initialize": true
+      },
+	  
+      "queryEndpoints": {
+       "findAll": {
+          "queryTemplate": "{\n    \u0027_operation\u0027: \u0027find\u0027,\n    \u0027_operation_args\u0027: \n    {\n        \u0027query\u0027: {\t\t},\n        \u0027fields\u0027: {\n \t\t   \t\u0027_id\u0027: 0\n\t\t   }\n    }\n}     ",
+          "metaData": {},
+          "tags": [],
+          "bindVariables": {},
+          "stage": "UNVERIFIED",
+          "outputFormat": {
+            "outputFormat": "JSON"
+          },
+          "name": "findAll",
+          "timeCreated": "Wed Apr 04 17:41:22 EDT 2018",
+          "createdBy": "admin",
+          "description": ""
+        }
+     },
+	  
+      "deleteEndpoints": {},
+      "submitEndpoints": {
+        "csvFile": {
+          "type": "MULTIPART",
+          "properties": {
+            "inputType": "CSV_FILE"
+          },
+          "name": "csvFile",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "jsonFile": {
+          "type": "MULTIPART",
+          "properties": {
+            "inputType": "JSON_FILE"
+          },
+          "name": "jsonFile",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "csv": {
+          "type": "FORM_DATA",
+          "properties": {
+            "inputType": "CSV"
+          },
+          "name": "csv",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "json": {
+          "type": "FORM_DATA",
+          "properties": {
+            "inputType": "JSON"
+          },
+          "name": "json",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        }
+      },
+  
+      "providerId": "edu.emory.cci.bindaas.datasource.provider.mongodb.MongoDBProvider",
+      "providerVersion": 1,
+      "name": "ImageList",
+      "timeCreated": "Mon April 2 13:45:49 EDT 2018",
+      "createdBy": "admin",
+      "description": "Image List for SEER VTR radiomics feature validation"
+    } ,
+  
+    "RadiomicsFeatures": {
+      "dataSource": {
+        "host": "127.0.0.1",
+        "port": "27017",
+        "db": "quip_comp",
+        "collection": "validation_radiomics_features",
+        "initialize": true
+      },
+  
+      "queryEndpoints": {
+       "findFeatureById": {
+          "queryTemplate": "{\n    \u0027_operation\u0027: \u0027find\u0027,\n    \u0027_operation_args\u0027: \n    {\n        \u0027query\u0027:{\"case_id\": \"$case_id$\"},\n        \u0027fields\u0027: {\u0027_id\u0027:0,  \u0027case_id\u0027: 1, \u0027image_width\u0027: 1, \u0027image_height\u0027: 1, \u0027patch_x\u0027: 1, \u0027patch_y\u0027: 1,  \u0027patch_width\u0027: 1,  \u0027patch_height\u0027: 1,  \u0027nuclei_ratio\u0027: 1, \u0027patch_area_micro\u0027: 1,  \u0027nuclei_area_micro\u0027: 1,  \u0027nuclei_average_perimeter\u0027: 1,  \u0027nuclei_average_area\u0027: 1 }\n    }\n}         ",
+  "metaData": {},
+          "tags": [],
+          "bindVariables": {
+            "case_id": {
+              "name": "case_id",
+              "required": true,
+              "defaultValue": "",
+              "description": ""
+            }
+           },
+          "stage": "UNVERIFIED",
+          "outputFormat": {
+            "outputFormat": "JSON"
+          },
+          "name": "findFeatureById",
+          "timeCreated": "Wed Apr 04 17:41:22 EDT 2018",
+          "createdBy": "admin",
+          "description": ""
+        }
+     },
+  
+      "deleteEndpoints": {},
+      "submitEndpoints": {
+        "csvFile": {
+          "type": "MULTIPART",
+          "properties": {
+            "inputType": "CSV_FILE"
+          },
+          "name": "csvFile",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "jsonFile": {
+          "type": "MULTIPART",
+          "properties": {
+            "inputType": "JSON_FILE"
+          },
+          "name": "jsonFile",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "csv": {
+          "type": "FORM_DATA",
+          "properties": {
+            "inputType": "CSV"
+          },
+          "name": "csv",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        },
+        "json": {
+          "type": "FORM_DATA",
+          "properties": {
+            "inputType": "JSON"
+          },
+          "name": "json",
+          "timeCreated": "Fri Jul 15 13:45:49 EDT 2016",
+          "createdBy": "admin",
+          "description": ""
+        }
+      },
+	  
+      "providerId": "edu.emory.cci.bindaas.datasource.provider.mongodb.MongoDBProvider",
+      "providerVersion": 1,
+      "name": "RadiomicsFeatures",
+      "timeCreated": "Mon April 2 13:45:49 EDT 2018",
+      "createdBy": "admin",
+      "description": "Radiomics Features of SEER VTR images"
+    }
+  },
+  
+  "params": {},
+  "name": "validate_image_list",
+  "timeCreated": "Mon April 2 13:43:37 EDT 2018",
+  "createdBy": "admin",
+  "description": "Image Attributes for SEER project"
+}
