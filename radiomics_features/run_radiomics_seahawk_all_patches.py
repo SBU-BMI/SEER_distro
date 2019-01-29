@@ -770,7 +770,7 @@ if __name__ == "__main__":
   objects = db.objects;  
       
   #collection_saved= db.patch_level_radiomics_features;
-  collection_saved= db.patch_level_radiomics_features_run2;
+  collection_saved= db.patch_level_radiomics_features_test;
   
   #setup local folders 
   local_dataset_folder=os.path.join(my_home, 'SEER_UGUH_dataset');
