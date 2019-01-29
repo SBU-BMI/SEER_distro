@@ -1,0 +1,4 @@
+
+This project is used to validate patch level radiomics feature dataset for 270 SEER VTR image;
+The url of testing server is http://tahsin175.informatics.stonybrook.edu 
+and function link is http://tahsin175.informatics.stonybrook.edu/radiomics_validate/image_list.php;
