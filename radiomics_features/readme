@@ -1,0 +1,5 @@
+How to run patch level radiomics feature pipeline:
+Step 1: down load code from github reposotory https://github.com/SBU-BMI/SEER_distro/new/master/radiomics_features;
+Step 2: Install all python library ;
+Step 3: change all setting as need;
+Step 4: run_all_steps.py from step 1 to step 5;
