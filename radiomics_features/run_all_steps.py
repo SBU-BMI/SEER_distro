@@ -74,18 +74,7 @@ if __name__ == '__main__':
   print image_list;
   #exit(); 
   
-  step_num=1;  
-  
-  '''
-  if step_num==1:
-    for image_id in image_list2:
-      if  image_id not in image_list1:
-        print image_id;
-        cmd = "qsub -v imageid=" + image_id + " run_radiomics_seahawk_all_patches.pbs";
-        print cmd;
-        proc = subprocess.Popen(cmd, shell=True) 
-        status = proc.wait() ;
-  '''
+  step_num=1;   
   
   if step_num==1:
     #generate patch level radiomics feature dataset for all patches
