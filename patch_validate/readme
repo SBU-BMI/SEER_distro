@@ -11,4 +11,6 @@ How to:
 4) update AnnotationStore.js in quip-viewer container /var/www/html/camicroscope/js/annotationtools/folder
 5) load validate_image_list.project to quip-data container bindaas project folder and restart bindaas server
 6) create validation_image_list and validation_radiomics_features in 175 server db "quip_comp";
-7) run /home/bwang/patch_level/load_patch_data.py in eagle cluster to load relevant dataset to from quip3 server to 175 server;
+7) run  loadPatch_level_data.py in eagle cluster to populated collection validation_radiomics_features from collection patch_level_radiomics_features 
+ (randomly select 10 record per image from collection patch_level_radiomics_features)
+8) run /home/bwang/patch_level/load_patch_data.py in eagle cluster to load relevant dataset to from quip3 server to 175 server;
