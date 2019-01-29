@@ -48,9 +48,7 @@ if __name__ == '__main__':
   db = client[db_name1];    
   images =db.images; 
   metadata=db.metadata;
-  objects = db.objects; 
-  
-  #collection_saved= db.patch_level_radiomics_features;
+  objects = db.objects;   
   
   '''
   #create image_list
@@ -101,8 +99,8 @@ if __name__ == '__main__':
           
   if step_num==2:
     #step 2: generate patient level or image level radiomics feature dataset
-    patch_level_dataset = db.patch_level_radiomics_features;
-    collection_saved    = db.patient_level_radiomics_features_statistics;     
+    patch_level_dataset = db.patch_level_radiomics_features_test;
+    collection_saved    = db.patient_level_radiomics_features_statistics_test;     
     feature_array=["nucleus_material_percentage","nuclei_average_area","nuclei_average_perimeter","fg_glcm_Autocorrelation","fg_firstorder_90Percentile","fg_firstorder_Maximum","bg_firstorder_Energy","fg_firstorder_10Percentile","fg_firstorder_Entropy","bg_firstorder_RootMeanSquared","bg_firstorder_90Percentile","bg_glcm_Correlation","fg_firstorder_RootMeanSquared","fg_firstorder_Mean","fg_firstorder_Energy","fg_glcm_Correlation","bg_firstorder_10Percentile","fg_firstorder_Median","bg_firstorder_Kurtosis","bg_firstorder_Maximum","fg_firstorder_Kurtosis","bg_firstorder_Entropy","bg_firstorder_Mean","bg_firstorder_Median","bg_glcm_Autocorrelation"]; 
       
     print '--- process image_list  ---- '; 
