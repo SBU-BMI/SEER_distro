@@ -48,17 +48,7 @@ if __name__ == '__main__':
   db = client[db_name1];    
   images =db.images; 
   metadata=db.metadata;
-  objects = db.objects;   
-  
-  '''
-  #create image_list
-  image_list1=[];
-  for case_id in collection_saved.distinct("case_id"):     
-    image_id=str(case_id)+".tif"
-    image_list1.append(image_id);    
-  print "total rows from image_list1 file is %d " % len(image_list1) ; 
-  #exit();
-  '''
+  objects = db.objects;     
   
   print '--- read image_list file ---- ';    
   image_list=[];
