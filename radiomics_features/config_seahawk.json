@@ -1,0 +1,7 @@
+{
+  "patch_size":500,   
+  "db_host":"your_db_host",
+  "db_port":"27017",
+  "db_name1":"quip",
+  "db_name2":"quip_comp"   
+}
