@@ -1,0 +1,47 @@
+#!/bin/bash
+#LongQ will tell it to run on compute node
+#PBS -q longq
+# set name of job
+#PBS -N patch_level_radiomics_features 
+#PBS -e /home/bwang/temp/logs/pbs/
+#PBS -o /home/bwang/temp/logs/pbs/
+# set the number of nodes and processes per node
+#PBS -l nodes=1:ppn=40
+#PBS -l mem=80Gb
+# mail alert at (b)eginning, (e)nd and (a)bortion of execution
+#PBS -m bea
+# send mail to the following address
+#PBS -M tigerfan7495@gmail.com
+
+echo "-----------------------------------------------------"
+echo "Date: $(date)                     Host:$(hostname)"
+echo "-----------------------------------------------------"
+
+#copy segmen result files from storage node
+#nfs001:/data/shared/seer_patch_level
+
+LOCALHOME="/data1/bwang"
+LOCALDIR_DATASET=$LOCALHOME/Rutger_Dataset
+LOCALDIR_IMAGE=$LOCALHOME/Rutger_Image
+LOCALDIR_OUTPUT=$LOCALHOME/Rutger_Output
+
+
+DESTHOST="nfs003"
+DESTDIR="/data/shared/bwang/radiomics_feature/output"
+
+cd $PBS_O_WORKDIR
+source activate bw_python
+python run_radiomics_rutger_all_patches_new.py  $case_id $imageFilePath $segmentResultPath
+source deactivate
+
+echo rsync -avr  $LOCALDIR_OUTPUT/ $DESTHOST:$DESTDIR/
+rsync -av -r $LOCALDIR_OUTPUT/ $DESTHOST:$DESTDIR/
+
+#remove tmp folder
+rm -rf $LOCALDIR_DATASET
+rm -rf $LOCALDIR_IMAGE
+rm -rf $LOCALDIR_OUTPUT
+
+echo "-----------------------------------------------------"
+echo "Date: $(date)"
+echo "-----------------------------------------------------"
