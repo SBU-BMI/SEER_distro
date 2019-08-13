@@ -783,7 +783,7 @@ def isTileRelated2TumorRegion(json_file_path,humanMarkupList_tumor,humanMarkupLi
 
 #######################################################
 async def run_client(image_path,local_image_folder):
-    async with asyncssh.connect('quip.bmi.stonybrook.edu',username='bwang', password='trymenow') as conn:
+    async with asyncssh.connect('remote_url',username='username', password='password') as conn:
       await asyncssh.scp((conn, image_path), local_image_folder)                
 #######################################################
 
