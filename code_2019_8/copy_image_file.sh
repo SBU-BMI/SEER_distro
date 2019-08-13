@@ -20,6 +20,6 @@ do
   
   if [[ $findit == 0 ]];then
    echo $file_path
-   scp bwang@quip.bmi.stonybrook.edu:$file_path  $destdir/. 
+   scp user@remote_url:$file_path  $destdir/. 
   fi     
 done
